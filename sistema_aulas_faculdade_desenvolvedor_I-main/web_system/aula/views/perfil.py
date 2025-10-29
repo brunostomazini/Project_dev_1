@@ -17,16 +17,14 @@ def perfil_detail(request, pk):
     context = {
         'perfil' : perfil
     }
-
     return render(request, 'perfils/read.html', context)
 
-def perfil_delete(request, perfil_id):
-     perfil = get_object_or_404(Perfil, pk=perfil_id)
-
+def perfil_delete(request, pk):
+     perfil = get_object_or_404(Perfil, pk=pk)
      try:
          if request.method == 'POST':
              v_perfil_id = request.POST.get('perfil_id', None)
-             if int(v_perfil_id) == perfil_id:
+             if int(v_perfil_id) == pk:
                  perfil.delete()
                  return redirect('app:perfil_list')
          else:
@@ -43,11 +41,9 @@ def perfil_create(request):
         form = PerfilForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('app:perfil_list')
-        
+            return redirect('app:perfil_list')  
     else:
         form = PerfilForm()
-
     context = {
         'form':form
     }
@@ -60,14 +56,11 @@ def perfil_update(request, perfil_id):
         if form.is_valid():
             form.save()
             return redirect('app:perfil_list')
-        
     else:
         form = PerfilForm(instance=perfil)
-
     context = {
         'form':form,
         'perfil':perfil
 
     }
-
     return render(request, 'perfils/update.html', context)

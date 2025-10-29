@@ -17,8 +17,9 @@
         <th>#</th>
         <th>Código</th>
         <th>Nome</th>
-        <th>Ação função</th>
-        <th>Ação nome</th>
+        <th>Leitura</th>
+        <th>Atualizar</th>
+        <th>Deletar</th>
       </thead>
       <tbody>
       {% for perfil in perfils %}
@@ -36,8 +37,19 @@
           </td>
           <td>
             <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="button">Button</button>
+              <a class="btn btn-outline-secondary btn-lg" role="button"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar"
+                     href="{% url 'app:perfils_function_update' perfil.id %}">
+                  <i class="bi bi-arrow-left"></i></a>
             </div>
+            <td>
+              <div>
+                <a class="btn btn-outline-secondary btn-lg" role="button"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar codigo"
+                     href="{% url 'app:class_code_generator' perfil.id %}">
+                  <i class="bi bi-arrow-left"></i></a>
+              </div>
+            </td>
           </td>
         </tr>
       {% endfor %}

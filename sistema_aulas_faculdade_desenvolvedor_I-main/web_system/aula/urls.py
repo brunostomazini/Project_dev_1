@@ -5,7 +5,7 @@ from django.urls import path
 import aula.views.estatisticas as views_funcoes
 from aula.views import PrimeiraView
 from aula.views import NomeView
-from aula.views.perfil_classes import PerfilListView, PerfilDetailView
+from aula.views.perfil_classes import PerfilListView, PerfilDetailView, CodeGenerate, PerfilDeleteView, PerfilCreate
 from aula.views import perfil_list, perfil_detail, perfil_delete, perfil_create, perfil_update
 
 from aula.views import saudacaoView
@@ -42,4 +42,9 @@ urlpatterns = [
 
     path('function/update/<int:perfil_id>', perfil_update, name="perfils_function_update"),
 
+    path('class/gerar_codigo/<int:pk>', CodeGenerate.as_view(), name="class_code_generator"),
+
+    path('class/delete/<int:pk>/', PerfilDeleteView.as_view(), name="perfil_class_delete" ),
+
+    path('class/create', PerfilCreate.as_view(), name="perfil_class_create")
 ]
