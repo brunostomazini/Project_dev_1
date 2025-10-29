@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    <h1>Criar perfil</h1>
+
+{% endblock title %}
+
+{% block content %}
+    <form id="aula" action="{% url 'aula:aula_function_create' %}"
+    method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+
+    <button type="submit" class="btn btn_outline-success btn_lg"
+    form="aula" value="Salvar"> <i class="bi bi-floppy"></i>Salvar</button>
+
+    <button type="reset" name="reset" class="btn btn_outline-danger btn_lg"
+    form="aula" value="Reset"> <i class="bi bi-arrow-clockwise"></i>Limpar</button>  
+    
+    <a class="btn btn_outline-light btn-lg" role="button" href="{% url 'aula:perfil_list' %}">
+        <i class="bi bi_arrow-left"></i>Voltar</a>
+    </form>
+{% endblock content %}

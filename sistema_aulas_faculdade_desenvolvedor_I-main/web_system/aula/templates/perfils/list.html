@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+  {% block title %}
+    {% if perfils %}
+      <h1>Lista de Exemplos</h1>
+    {% else %}
+      <h1>Nenhum exemplo cadastrado</h1>
+    {% endif %}
+
+  {% endblock title %}
+
+  {% block content %}
+
+  {% if perfils %}
+    <table class ="table table-hover">
+      <thead>
+        <th>#</th>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Ação função</th>
+        <th>Ação nome</th>
+      </thead>
+      <tbody>
+      {% for perfil in perfils %}
+        <tr>
+          <td>{{ perfil.id }}</td>
+          <td>{{ perfil.id }}</td>
+          <td>{{ perfil.id }}</td>
+          <td>
+              <div>
+                <a class="btn btn-outline-secondary btn-lg" role="button"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar com funções"
+                     href="{% url 'app:perfils_function_read' perfil.id %}">
+                  <i class="bi bi-arrow-left"></i></a>
+              </div>
+          </td>
+          <td>
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" type="button">Button</button>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock content %}

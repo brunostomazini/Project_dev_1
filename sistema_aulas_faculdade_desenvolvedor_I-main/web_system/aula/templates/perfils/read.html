@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+  {% block title %}
+    <h1>{{ perfil.nome|capfirst }}</h1>
+  {% endblock title%}
+  {% block content %}
+
+    <div class="content">
+      <div class="row">
+        <strong>Cidade:</strong> <p>{{ perfil.cidade }}</p>
+        <strong>Pais:</strong><p>{{ perfil.pais|capfirst }}</p>
+      </div>
+    </div>
+
+    <div>
+      <a class="btn btn-outline-light btn-lg" role="button"
+         href="{% url 'app:perfil_list' %}"><i
+              class="bi bi-arrow-left"></i></a>
+    </div>
+  {% endblock content %}
