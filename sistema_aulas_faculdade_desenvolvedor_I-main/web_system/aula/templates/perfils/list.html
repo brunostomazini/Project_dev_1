@@ -29,25 +29,31 @@
           <td>{{ perfil.id }}</td>
           <td>
               <div>
+                {% if perms.aula.view_perfil %}
                 <a class="btn btn-outline-secondary btn-lg" role="button"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar com funções"
                      href="{% url 'app:perfils_function_read' perfil.id %}">
                   <i class="bi bi-arrow-left"></i></a>
+                {% endif %}
               </div>
           </td>
           <td>
             <div class="d-grid gap-2">
+              {% if perms.aula.update_perfil %}
               <a class="btn btn-outline-secondary btn-lg" role="button"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar"
                      href="{% url 'app:perfils_function_update' perfil.id %}">
                   <i class="bi bi-arrow-left"></i></a>
+                  {% endif %}
             </div>
             <td>
               <div>
+                {% if perms.aula.delete_perfil %}
                 <a class="btn btn-outline-secondary btn-lg" role="button"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar codigo"
                      href="{% url 'app:class_code_generator' perfil.id %}">
                   <i class="bi bi-arrow-left"></i></a>
+                {% endif %}
               </div>
             </td>
           </td>

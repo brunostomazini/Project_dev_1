@@ -47,4 +47,6 @@ urlpatterns = [
     path('class/delete/<int:pk>/', PerfilDeleteView.as_view(), name="perfil_class_delete" ),
 
     path('class/create', PerfilCreate.as_view(), name="perfil_class_create")
+
+
 ]

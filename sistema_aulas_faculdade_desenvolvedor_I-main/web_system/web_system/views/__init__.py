@@ -1,1 +1,3 @@
-from .estaticas import index
+from .estaticas import *
+from .contatos import *
+from .contato_view import *

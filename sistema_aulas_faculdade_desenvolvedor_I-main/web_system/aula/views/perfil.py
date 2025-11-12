@@ -1,8 +1,12 @@
 from aula.forms.perfil_form import PerfilForm
 from aula.models import Perfil
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required, permission_required
 
-
+@login_required
+@permission_required('aula.view_perfil', raise_exception=True)
+@require_http_methods(['GET'])
 def perfil_list(request):
     perfils = Perfil.objects.all()
 
@@ -12,6 +16,8 @@ def perfil_list(request):
 
     return render(request, 'perfils/list.html', context)
 
+
+#@require_http_methods(['GET'])
 def perfil_detail(request, pk):
     perfil = Perfil.objects.get(id=pk)
     context = {
@@ -19,6 +25,8 @@ def perfil_detail(request, pk):
     }
     return render(request, 'perfils/read.html', context)
 
+
+#@require_http_methods(['GET','POST'])
 def perfil_delete(request, pk):
      perfil = get_object_or_404(Perfil, pk=pk)
      try:
@@ -35,7 +43,9 @@ def perfil_delete(request, pk):
      except:
         context = {}
         return render(request, "perfils/list.html", context)
-     
+
+
+#@require_http_methods(['GET','POST']) 
 def perfil_create(request):
     if request.method =='POST':
         form = PerfilForm(request.POST)
@@ -49,6 +59,7 @@ def perfil_create(request):
     }
     return render(request, 'perfils/create_simple.html', context)
 
+#@require_http_methods(['GET','POST'])
 def perfil_update(request, perfil_id):
     perfil = get_object_or_404(Perfil, pk=perfil_id)
     if request.method =='POST':

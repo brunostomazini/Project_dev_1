@@ -4,8 +4,13 @@ from aula.models import Perfil
 from django.shortcuts import render, redirect, get_object_or_404
 import random
 import string
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
 
-class PerfilListView(View):
+class PerfilListView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url=reverse_lazy('accounts/login')
+    permission_required='aula.view_perfil'
+
     @staticmethod
     def get(request):
         perfils = Perfil.objects.all()
@@ -14,7 +19,10 @@ class PerfilListView(View):
         }
         return render(request, 'perfils/list.html', context)
     
-class PerfilDetailView(View):
+class PerfilDetailView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url=reverse_lazy('accounts/login')
+    permission_required='aula.view_perfil'
+
     @staticmethod
     def get(request, pk):
         perfil = Perfil.objects.get(id=pk)
@@ -24,7 +32,7 @@ class PerfilDetailView(View):
 
         return render(request, 'perfils/read.html', context)
 
-class CodeGenerate(View):
+class CodeGenerate(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     @staticmethod
     def get(request, pk):
@@ -38,7 +46,9 @@ class CodeGenerate(View):
             print(f"")
             return redirect('aula:Perfil_class_list')
         
-class PerfilDeleteView(View):
+class PerfilDeleteView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url=reverse_lazy('accounts/login')
+    permission_required='aula.delete_perfil'
 
     @staticmethod
     def get(request, pk):
@@ -67,7 +77,9 @@ class PerfilDeleteView(View):
             return render(request, 'perfil/list.html', context)"""
     
 
-class PerfilCreate(View):
+class PerfilCreate(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url=reverse_lazy('accounts/login')
+    permission_required='aula.add_perfil'
 
     @staticmethod
     def get(request):
