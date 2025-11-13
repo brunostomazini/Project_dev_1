@@ -5,18 +5,20 @@
 {% endblock title %}
 
 {% block content %}
-    <form id="aula" action="{% url 'aula:aula_function_create' %}"
-    method="post">
+    <form id="aula" action="{% url 'aula:perfil_class_create' %}" method="post">
     {% csrf_token %}
-        {{ form.as_p }}
+    {{ form.as_p }}
 
-    <button type="submit" class="btn btn_outline-success btn_lg"
-    form="aula" value="Salvar"> <i class="bi bi-floppy"></i>Salvar</button>
+    <button type="submit" class="btn btn-outline-success btn-lg" form="aula" value="Salvar">
+        <i class="bi bi-floppy"></i> Salvar
+    </button>
 
-    <button type="reset" name="reset" class="btn btn_outline-danger btn_lg"
-    form="aula" value="Reset"> <i class="bi bi-arrow-clockwise"></i>Limpar</button>  
-    
-    <a class="btn btn_outline-light btn-lg" role="button" href="{% url 'aula:perfil_list' %}">
-        <i class="bi bi_arrow-left"></i>Voltar</a>
-    </form>
+    <button type="reset" class="btn btn-outline-danger btn-lg" form="aula" value="Reset">
+        <i class="bi bi-arrow-clockwise"></i> Limpar
+    </button>
+
+    <a class="btn btn-outline-light btn-lg" role="button" href="{% url 'aula:perfil_class_list' %}">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
+</form>
 {% endblock content %}

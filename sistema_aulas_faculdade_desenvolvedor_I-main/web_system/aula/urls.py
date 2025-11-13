@@ -22,16 +22,6 @@ urlpatterns = [
 
     path('funcao/teste/<str:name>', views_funcoes.teste, name="teste"),
 
-    path('classe/teste', PrimeiraView.as_view(), name='primeira_view_classe'),
-
-    path('classe/saudacao', saudacaoView.as_view(), name='saudacao_view_classe'),
-
-    path('classe/nome_classe/<str:cidade>', NomeView.as_view(), name='nome_view_classe'),
-
-    path('class/list', PerfilListView.as_view(), name="Perfil_class_list"),
-
-    path('class/read/<int:pk>', PerfilDetailView.as_view(), name="Perfil_class_read"),
-
     path('funcao/perfils', perfil_list, name='perfil_list'),
 
     path('function/read/<int:pk>', perfil_detail, name="perfils_function_read"),
@@ -42,11 +32,21 @@ urlpatterns = [
 
     path('function/update/<int:perfil_id>', perfil_update, name="perfils_function_update"),
 
+    path('classe/teste', PrimeiraView.as_view(), name='primeira_view_classe'),
+
+    path('classe/saudacao', saudacaoView.as_view(), name='saudacao_view_classe'),
+
+    path('classe/nome_classe/<str:cidade>', NomeView.as_view(), name='nome_view_classe'),
+
+    path('class/list', PerfilListView.as_view(), name="perfil_class_list"),
+
+    path('class/read/<int:pk>', PerfilDetailView.as_view(), name="perfil_class_read"),
+
     path('class/gerar_codigo/<int:pk>', CodeGenerate.as_view(), name="class_code_generator"),
 
     path('class/delete/<int:pk>/', PerfilDeleteView.as_view(), name="perfil_class_delete" ),
 
-    path('class/create', PerfilCreate.as_view(), name="perfil_class_create")
+    path('class/create/', PerfilCreate.as_view(), name="perfil_class_create")
 
 
 ]

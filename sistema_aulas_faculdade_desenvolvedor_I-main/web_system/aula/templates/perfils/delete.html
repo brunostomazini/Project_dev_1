@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <div class="card shadow p-4" style="max-width: 500px; margin: 0 auto;">
+    <h2 class="mb-4">Excluir Perfil</h2>
+    <p>Tem certeza que deseja excluir o perfil <strong>{{ perfil.nome }}</strong>?</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-lg">
+        <i class="bi bi-trash"></i> Confirmar exclusão
+      </button>
+      <a href="{% url 'aula:perfil_class_list' %}" class="btn btn-secondary btn-lg ms-2">
+        <i class="bi bi-arrow-left"></i> Cancelar
+      </a>
+    </form>
+  </div>
+</div>
+{% endblock %}

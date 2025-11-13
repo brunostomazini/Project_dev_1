@@ -39,7 +39,7 @@ urlpatterns = [
 
     path('class/contato', ContatoView.as_view(), name="class_contact"),
 
-    path('accounts/login', auth_views.LoginView.as_view(template_name = "login.html", authentication_form = CustomLoginForm)),
+    path('accounts/login', auth_views.LoginView.as_view(template_name = "login.html", authentication_form = CustomLoginForm), name='login'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 

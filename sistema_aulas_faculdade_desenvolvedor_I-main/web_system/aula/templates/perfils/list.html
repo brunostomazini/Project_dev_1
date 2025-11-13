@@ -12,14 +12,22 @@
   {% block content %}
 
   {% if perfils %}
+  <div>
+    {% if perms.aula.add_perfil %}
+      <a class="btn btn-outline-success btn-lg"
+        data-bs-toggle="tooltip" data-bs-placement="top"
+        title="Adicionar novo perfil"
+        href="{% url 'aula:perfil_class_create' %}">
+        <i class="bi bi-plus-circle"></i>
+      </a>
+    {% endif %}
+  </div>
     <table class ="table table-hover">
       <thead>
         <th>#</th>
         <th>Código</th>
         <th>Nome</th>
-        <th>Leitura</th>
-        <th>Atualizar</th>
-        <th>Deletar</th>
+        <th>Opções</th>
       </thead>
       <tbody>
       {% for perfil in perfils %}
@@ -28,34 +36,31 @@
           <td>{{ perfil.id }}</td>
           <td>{{ perfil.id }}</td>
           <td>
-              <div>
-                {% if perms.aula.view_perfil %}
+            <div>
+              {% if perms.aula.view_perfil %}
                 <a class="btn btn-outline-secondary btn-lg" role="button"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar com funções"
-                     href="{% url 'app:perfils_function_read' perfil.id %}">
-                  <i class="bi bi-arrow-left"></i></a>
-                {% endif %}
-              </div>
-          </td>
-          <td>
-            <div class="d-grid gap-2">
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar com funções"
+                      href="{% url 'aula:perfil_class_read' perfil.id %}">
+                  <i class="bi bi-eye"></i></a>
+              {% endif %}
               {% if perms.aula.update_perfil %}
-              <a class="btn btn-outline-secondary btn-lg" role="button"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar"
-                     href="{% url 'app:perfils_function_update' perfil.id %}">
-                  <i class="bi bi-arrow-left"></i></a>
-                  {% endif %}
-            </div>
-            <td>
-              <div>
-                {% if perms.aula.delete_perfil %}
                 <a class="btn btn-outline-secondary btn-lg" role="button"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar codigo"
-                     href="{% url 'app:class_code_generator' perfil.id %}">
-                  <i class="bi bi-arrow-left"></i></a>
-                {% endif %}
-              </div>
-            </td>
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar"
+                      href="{% url 'aula:perfils_function_update' perfil.id %}">
+                    <i class="bi bi-pencil-square"></i></a>
+              {% endif %}
+
+              {% if perms.aula.delete_perfil %}
+                <a class="btn btn-outline-secondary btn-lg"
+                  role="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Deletar"
+                  href="{% url 'aula:perfil_class_delete' perfil.id %}">
+                  <i class="bi bi-trash"></i>
+                </a>
+              {% endif %}
+            </div>
           </td>
         </tr>
       {% endfor %}
