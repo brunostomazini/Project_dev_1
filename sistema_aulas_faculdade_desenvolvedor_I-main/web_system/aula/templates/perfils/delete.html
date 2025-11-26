@@ -8,8 +8,9 @@
     <h2 class="mb-4">Excluir Perfil</h2>
     <p>Tem certeza que deseja excluir o perfil <strong>{{ perfil.nome }}</strong>?</p>
 
-    <form method="post">
+    <form method="post" action="{% url 'aula:perfil_class_delete' perfil.id %}">
       {% csrf_token %}
+      <input type="hidden" id="perfil_id" name="perfil_id" value="{{ perfil.id }}">
       <button type="submit" class="btn btn-danger btn-lg">
         <i class="bi bi-trash"></i> Confirmar exclusão
       </button>

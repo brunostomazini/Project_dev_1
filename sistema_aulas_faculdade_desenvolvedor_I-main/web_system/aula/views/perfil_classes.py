@@ -21,7 +21,7 @@ class PerfilListView(LoginRequiredMixin, PermissionRequiredMixin, View):
         return render(request, 'perfils/list.html', context)
     
 class PerfilDetailView(LoginRequiredMixin, PermissionRequiredMixin, View):
-    login_url=reverse_lazy('accounts/login')
+    login_url=reverse_lazy('login')
     permission_required='aula.view_perfil'
 
     @staticmethod
@@ -34,6 +34,8 @@ class PerfilDetailView(LoginRequiredMixin, PermissionRequiredMixin, View):
         return render(request, 'perfils/read.html', context)
 
 class CodeGenerate(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = reverse_lazy('login')
+    permission_required = 'aula.generate_code_perfil'
 
     @staticmethod
     def get(request, pk):
@@ -48,10 +50,11 @@ class CodeGenerate(LoginRequiredMixin, PermissionRequiredMixin, View):
             return redirect('aula:perfil_class_list')
         
 class PerfilDeleteView(LoginRequiredMixin, PermissionRequiredMixin, View):
-    login_url=reverse_lazy('accounts/login')
+    login_url=reverse_lazy('login')
     permission_required='aula.delete_perfil'
 
-    def get(self, request, pk):
+    
+    '''def get(self, request, pk):
         perfil = get_object_or_404(Perfil, pk=pk)
         return render(request, 'perfils/delete.html', {'perfil': perfil})
 
@@ -59,9 +62,9 @@ class PerfilDeleteView(LoginRequiredMixin, PermissionRequiredMixin, View):
         perfil = get_object_or_404(Perfil, pk=pk)
         perfil.delete()
         messages.success(request, 'Perfil deletado com sucesso!')
-        return redirect('aula:perfil_list')
+        return redirect('aula:perfil_list')'''
 
-    '''@staticmethod
+    @staticmethod
     def get(request, pk):
         perfil = get_object_or_404(Perfil, pk=pk)
         try:
@@ -81,15 +84,19 @@ class PerfilDeleteView(LoginRequiredMixin, PermissionRequiredMixin, View):
             v_perfil_id = request.POST.get("perfil_id", None)
             if int(v_perfil_id) == pk:
                 perfil.delete()
-                return render(request, 'perfils/list.html', context)
+                context = {
+                    'message':"Deleção concluida com sucesso"
+                }
+                #return render(request, 'perfils/list.html', context)
+                return redirect('app:perfil_list')
         except Exception as e:
             print(f"Erro ao deletar perfil: {e}")
             context = {'error': 'Não foi possível deletar o perfil.'}
-            return render(request, 'perfils/list.html', context)'''
+            return render(request, 'perfils/list.html', context)
     
 
 class PerfilCreate(LoginRequiredMixin, PermissionRequiredMixin, View):
-    login_url=reverse_lazy('accounts/login')
+    login_url=reverse_lazy('login')
     permission_required='aula.add_perfil'
 
     @staticmethod
@@ -110,3 +117,24 @@ class PerfilCreate(LoginRequiredMixin, PermissionRequiredMixin, View):
             'form': form
         }
         return render(request, 'perfils/create_simple.html', context)
+    
+class PerfilUpdateView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = reverse_lazy('login')
+    permission_required = 'aula.change_perfil'
+
+    def get(self, request, pk):
+        perfil = get_object_or_404(Perfil, pk=pk)
+        form = PerfilForm(instance=perfil)  # Pass the object to the form for editing
+        context = {'form': form, 'perfil': perfil}
+        return render(request, 'perfils/update.html', context)
+
+    def post(self, request, pk):
+        perfil = get_object_or_404(Perfil, pk=pk)
+        form = PerfilForm(request.POST, instance=perfil)
+        
+        if form.is_valid():
+            form.save()  # Save the updated object
+            return redirect('perfils:list')  # Redirect to list page after successful update
+        else:
+            context = {'form': form, 'perfil': perfil}
+            return render(request, 'perfils/update.html', context)

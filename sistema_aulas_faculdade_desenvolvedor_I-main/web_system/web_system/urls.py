@@ -23,6 +23,8 @@ from .views import contact
 from .views import ContatoView
 from django.contrib.auth import views as auth_views
 from web_system.forms import CustomLoginForm
+from web_system.views import ProfileView
+
 
 
 
@@ -39,8 +41,10 @@ urlpatterns = [
 
     path('class/contato', ContatoView.as_view(), name="class_contact"),
 
-    path('accounts/login', auth_views.LoginView.as_view(template_name = "login.html", authentication_form = CustomLoginForm), name='login'),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name = "login.html", authentication_form = CustomLoginForm), name='login'),
 
     path('accounts/', include('django.contrib.auth.urls')),
+
+    path('accounts/profile/', ProfileView.as_view(), name='profile'),
 
 ]

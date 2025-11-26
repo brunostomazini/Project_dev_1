@@ -21,3 +21,8 @@ class Perfil(BaseModel):
 
 
     objects = Perfil_Manager
+
+    class Meta:
+        permissions = [
+            ("generate_code","Can generate new codes")
+        ]
