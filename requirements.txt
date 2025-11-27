@@ -3,6 +3,7 @@ asgiref==3.10.0
 contourpy==1.3.2
 cycler==0.12.1
 Django==5.0
+djangorestframework==3.16.1
 flatcam==0.8.5
 fonttools==4.58.5
 kiwisolver==1.4.8

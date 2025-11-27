@@ -47,4 +47,6 @@ urlpatterns = [
 
     path('accounts/profile/', ProfileView.as_view(), name='profile'),
 
+    path('services/', include('services.urls'))
+
 ]
