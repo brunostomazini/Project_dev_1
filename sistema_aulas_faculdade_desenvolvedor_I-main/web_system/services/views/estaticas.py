@@ -44,3 +44,4 @@ def calculo(request):
             'error':str(e)
         }
         return JsonResponse(context, status=status.HTTP_400_BAD_REQUEST, safe=False)
+

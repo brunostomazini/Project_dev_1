@@ -5,6 +5,8 @@ from .serialiazers import CalculoSerialiazer
 
 
 
+
+
 app_name = 'services'
 
 urlpatterns = [
@@ -15,6 +17,8 @@ urlpatterns = [
 
     path('saudacao/classe', SaudacaoClass.as_view(), name="saudacao_class"),
 
-    path('calculo', calculo, name="calculo")
+    path('calculo', calculo, name="calculo"),
+
+    path("perfil", ExemploListService.as_view(), name="list_service" )
 
 ]
