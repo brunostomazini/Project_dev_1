@@ -34,7 +34,7 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      {% if user.is_autenticated %}
+      {% if user.is_authenticated %}
         <span class="navbar-text text-white px-2">
           <a class="nav-link" href="{% url 'profile' %}">
             <i class="bi bi-person-fill"></i> {{ user.first_name }}
